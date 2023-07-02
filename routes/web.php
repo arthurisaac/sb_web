@@ -1,12 +1,6 @@
 <?php
 
-use App\Http\Controllers\CityController;
-use App\Http\Controllers\RiderController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\RestaurantController;
-use App\Http\Controllers\RideRequestController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\SliderController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,20 +23,8 @@ Route::get('/home', function () {
 })->middleware('auth');
 
 Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin',], function () {
-    Route::resource('sliders', SliderController::class);
-    Route::resource('cities', CityController::class);
-    Route::resource('settings', SettingController::class);
-    Route::resource('restaurants', RestaurantController::class);
-    Route::resource('delivery-men', RiderController::class);
+    Route::resource('categories', CategoryController::class);
 });
 
-Route::group(['middleware' => 'auth', 'prefix' => 'commons'], function () {
-    Route::resource('products', ProductController::class);
-    Route::resource('ride-request', RideRequestController::class);
-});
-
-Route::group(['middleware' => 'auth', 'prefix' => 'rider'], function () {
-    Route::resource('products', ProductController::class);
-});
 
 

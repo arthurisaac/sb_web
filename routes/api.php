@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\api\RiderController;
-use App\Http\Controllers\api\RideRequestController;
+use App\Http\Controllers\api\CategoryController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,13 +28,5 @@ Route::middleware(['auth:api', 'role:admin'])->get('/admin', function () {
     // ...
 });
 
-Route::post('ride-request', [RideRequestController::class, 'getLatestRequestForRider']);
-Route::post('ride-request-pending', [RideRequestController::class, 'getPendingRequestForRider']);
-Route::post('ride-request-current', [RideRequestController::class, 'getCurrentRequestForRider']);
-Route::post('ride-accept-request', [RideRequestController::class, 'rideAcceptRequest']);
-Route::post('ride-request-next-step', [RideRequestController::class, 'rideRequestNextStep']);
-Route::post('ride-history-request', [RideRequestController::class, 'rideRequestHistory']);
-
-Route::post('rider-available', [RiderController::class, 'availableRiders']);
-
-Route::post('rider-position', [RiderController::class, 'updateRiderLocation']);
+//Route::apiResource('categories', CategoryController::class);
+Route::post('categories', [CategoryController::class, 'index']);

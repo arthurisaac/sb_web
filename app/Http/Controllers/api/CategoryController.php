@@ -1,19 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
-use App\Models\Slider;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\ApiResouce;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class SliderController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $sliders = Slider::all();
-        return view('admin.sliders.index', compact('sliders'));
+        $categories = Category::query()->get();
+        return new ApiResouce($categories);
     }
 
     /**
@@ -21,7 +23,7 @@ class SliderController extends Controller
      */
     public function create()
     {
-        return view('admin.sliders.create');
+        //
     }
 
     /**
@@ -29,18 +31,7 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'type' => 'required',
-            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-        ]);
-        $path = $request->file('image')->store('sliders', 'public');
-        $slider = new Slider([
-            'type' => $request->get('type'),
-            'type_id' => $request->get('type_id'),
-            'image' => $path,
-        ]);
-        $slider->save();
-        return redirect()->back()->with('success', 'Enregistré avec succès');
+        //
     }
 
     /**
