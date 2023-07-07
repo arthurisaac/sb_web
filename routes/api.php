@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\BoxController;
 use App\Http\Controllers\api\CategoryController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
@@ -30,3 +31,4 @@ Route::middleware(['auth:api', 'role:admin'])->get('/admin', function () {
 
 //Route::apiResource('categories', CategoryController::class);
 Route::post('categories', [CategoryController::class, 'index']);
+Route::post('all-boxes', [BoxController::class, 'index']);

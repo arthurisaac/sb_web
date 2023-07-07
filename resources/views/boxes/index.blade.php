@@ -36,7 +36,7 @@
                                     <td> {{ $box->price }} </td>
                                     <td> {{ $box->validity }} </td>
                                     <td> {{ $box->notation }} </td>
-                                    <td> {{ ($box->enable == 0) ? "Actif" : "Inactif" }} </td>
+                                    <td> {{ ($box->enable == 1) ? "Actif" : "Inactif" }} </td>
                                     <td> <button class="btn btn-sm btn-primary"></button><button class="btn btn-sm btn-danger" style="margin-left: 5px;"></button></td>
                                 </tr>
                             @endforeach
