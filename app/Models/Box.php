@@ -30,4 +30,8 @@ class Box extends Model
         'enable',
         'image'
     ];
+
+    public function images() {
+        return $this->hasMany(ImagesBox::class, 'box');
+    }
 }

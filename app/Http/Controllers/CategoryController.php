@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -55,7 +56,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('category.edit', compact('category'));
     }
 
     /**
@@ -63,7 +64,24 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        ]);
+
+        $categories = Category::query()->findOrFail($category->id);
+
+        $path = $request->get('old_image');
+        if ($request->file('image')) {
+            $path = $request->file('image')->store('images', 'public');
+        }
+
+        $categories->name = $request->get('name');
+        $categories->description = $request->get('description');
+        $categories->image = $path;
+        $categories->save();
+
+        return redirect()->back()->with('success', 'Modifié avec succès');
     }
 
     /**

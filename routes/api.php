@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\api\BoxController;
 use App\Http\Controllers\api\CategoryController;
+use App\Http\Controllers\api\OrderController;
+use App\Http\Controllers\api\OrderPaymentController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,3 +34,7 @@ Route::middleware(['auth:api', 'role:admin'])->get('/admin', function () {
 //Route::apiResource('categories', CategoryController::class);
 Route::post('categories', [CategoryController::class, 'index']);
 Route::post('all-boxes', [BoxController::class, 'index']);
+Route::post('boxes-in-category', [BoxController::class, 'showBoxOfACategory']);
+
+Route::post('save-order', [OrderController::class, 'store']);
+Route::post('save-payment', [OrderPaymentController::class, 'store']);

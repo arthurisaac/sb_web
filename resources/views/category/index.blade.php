@@ -31,7 +31,7 @@
                                     <td> {{ $category->name }} </td>
                                     <td> {{ ($category->isActive == 0) ? "Actif" : "Inactif" }} </td>
                                     <td> {{ $category->order }} </td>
-                                    <td> <button class="btn btn-sm btn-primary"></button><button class="btn btn-sm btn-danger" style="margin-left: 5px;"></button></td>
+                                    <td> <a href="{{ route("categories.edit", $category) }}" class="btn btn-sm btn-primary"></a><button class="btn btn-sm btn-danger" style="margin-left: 5px;"></button></td>
                                 </tr>
                             @endforeach
                             </tbody>

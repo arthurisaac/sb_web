@@ -37,7 +37,7 @@
                                     <td> {{ $box->validity }} </td>
                                     <td> {{ $box->notation }} </td>
                                     <td> {{ ($box->enable == 1) ? "Actif" : "Inactif" }} </td>
-                                    <td> <button class="btn btn-sm btn-primary"></button><button class="btn btn-sm btn-danger" style="margin-left: 5px;"></button></td>
+                                    <td> <a href="{{ route("boxes.edit", $box) }}" class="btn btn-sm btn-primary"></a><button class="btn btn-sm btn-danger" style="margin-left: 5px;"></button></td>
                                 </tr>
                             @endforeach
                             </tbody>
