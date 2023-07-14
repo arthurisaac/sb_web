@@ -22,7 +22,13 @@ class Order extends Model
         'promo_code',
         'total',
         'payment_method',
+        'trique',
         'order_confirmation',
         'delivrey_confirmation',
+        'trique'
     ];
+
+    public function Box() {
+        return $this->belongsTo(Box::class, 'box')->with("images");
+    }
 }

@@ -36,7 +36,6 @@ return new class extends Migration
             $table->text("country")->nullable(true);
             $table->boolean("enable")->default(true)->nullable(true);
             $table->string("image")->nullable(true);
-            $table->string("trique")->unique()->nullable(true);
             $table->timestamps();
         });
     }

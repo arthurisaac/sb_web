@@ -167,6 +167,19 @@
                     </div>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('app-settings.index') }}">
+                        <i class="mdi mdi-grid-large menu-icon"></i>
+                        <span class="menu-title">{{__("Paramètres app")}}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('sections.index') }}">
+                        <i class="mdi mdi-grid-large menu-icon"></i>
+                        <span class="menu-title">{{__("Section")}}</span>
+                    </a>
+                </li>
+
                 <li class="nav-item nav-category">pages</li>
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false"

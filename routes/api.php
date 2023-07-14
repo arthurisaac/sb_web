@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\api\AppSettingsController;
 use App\Http\Controllers\api\BoxController;
 use App\Http\Controllers\api\CategoryController;
 use App\Http\Controllers\api\OrderController;
 use App\Http\Controllers\api\OrderPaymentController;
+use App\Http\Controllers\api\SectionController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,3 +40,11 @@ Route::post('boxes-in-category', [BoxController::class, 'showBoxOfACategory']);
 
 Route::post('save-order', [OrderController::class, 'store']);
 Route::post('save-payment', [OrderPaymentController::class, 'store']);
+
+Route::post('settings', [AppSettingsController::class, 'index']);
+
+Route::post('sections', [SectionController::class, 'index']);
+
+Route::post('check-number', [OrderController::class, 'checkNumber']);
+
+Route::post('confirmed-order', [OrderController::class, 'madeConfirmation']);

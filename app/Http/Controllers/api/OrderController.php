@@ -58,6 +58,7 @@ class OrderController extends Controller
            'payment_method' => $request->get('payment_method'),
            'order_confirmation' => $request->get('order_confirmation'),
            'delivrey_confirmation' => $request->get('delivrey_confirmation'),
+            'trique' => $this->random_strings(14)
         ]);
         $order->save();
 
@@ -97,5 +98,45 @@ class OrderController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    function random_strings($length_of_string)
+    {
+
+        // String of all alphanumeric character
+        $str_result = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+        // Shuffle the $str_result and returns substring
+        // of specified length
+        return substr(str_shuffle($str_result),
+            0, $length_of_string);
+    }
+
+    public function checkNumber(Request $request) {
+        $request->validate([
+            "number" => "required"
+        ]);
+        $number = $request->get("number");
+        $order = Order::with("Box")->where("trique", $number)->first();
+
+        return response()->json([
+            'order' => $order,
+        ]);
+    }
+
+    public function madeConfirmation(Request $request) {
+        $request->validate([
+            "order_id" => "required"
+        ]);
+
+        $order = Order::query()->find($request->get("order_id"));
+        if ($order) {
+            $order->order_confirmation = true;
+        }
+        $order->save();
+
+        return response()->json([
+            'message' => 'Order confirmed successfully.',
+        ]);
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ApiResouce;
+use App\Http\Resources\ApiResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::query()->get();
-        return new ApiResouce($categories);
+        return new ApiResource($categories);
     }
 
     /**

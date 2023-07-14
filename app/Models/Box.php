@@ -28,7 +28,7 @@ class Box extends Model
         'is_inside',
         'country',
         'enable',
-        'image'
+        'image',
     ];
 
     public function images() {

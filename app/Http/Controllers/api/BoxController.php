@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ApiResouce;
+use App\Http\Resources\ApiResource;
 use App\Models\Box;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class BoxController extends Controller
 {
@@ -15,7 +16,7 @@ class BoxController extends Controller
     public function index()
     {
         $boxes = Box::query()->get();
-        return new ApiResouce($boxes);
+        return new ApiResource($boxes);
     }
 
     public function showBoxOfACategory(Request $request)
@@ -25,7 +26,7 @@ class BoxController extends Controller
         ]);
 
         $boxes = Box::with('images')->where("category", $request->get("category"))->get();
-        return new ApiResouce($boxes);
+        return new ApiResource($boxes);
     }
 
     /**

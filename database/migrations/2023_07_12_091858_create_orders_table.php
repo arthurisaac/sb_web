@@ -30,6 +30,7 @@ return new class extends Migration
             $table->double("payment_method")->nullable(true);
             $table->boolean("order_confirmation")->default(false)->nullable(true);
             $table->boolean("delivrey_confirmation")->default(false)->nullable(true);
+            $table->string("trique")->unique()->nullable(true);
             $table->timestamps();
         });
     }
