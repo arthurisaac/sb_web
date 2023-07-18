@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ExperienceItem extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'experience',
+        'box',
+    ];
 }

@@ -12,7 +12,8 @@ class ExperienceController extends Controller
      */
     public function index()
     {
-        //
+        $experiences = Experience::query()->get();
+        return view('experiences.index', compact('experiences'));
     }
 
     /**
@@ -20,7 +21,7 @@ class ExperienceController extends Controller
      */
     public function create()
     {
-        //
+        return view("experiences.create");
     }
 
     /**
@@ -28,7 +29,25 @@ class ExperienceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "country" => "required",
+            "city" => "required",
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        ]);
+
+        $path = $request->file('image')->store('images', 'public');
+
+        $data = new Experience([
+            'latitude' => $request->get('latitude'),
+            'longitude' => $request->get('longitude'),
+            'address' => $request->get('address'),
+            'city' => $request->get('city'),
+            'country' => $request->get('country'),
+            'image' => $path,
+        ]);
+        $data->save();
+
+        return redirect()->back()->with("success", "Expérience enregistrée avec succès");
     }
 
     /**

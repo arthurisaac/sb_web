@@ -33,7 +33,8 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <select name="category" class="form-control form-control-lg"
-                                                placeholder="category">
+                                                placeholder="category" required>
+                                            <option></option>
                                             @foreach($categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
@@ -103,6 +104,14 @@
                                     <div class="form-group">
                                         <textarea name="is_inside" class="form-control form-control-lg"
                                                   placeholder="is_inside"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <select name="experiences[]" id="experiences" class="form-control form-control-lg" multiple>
+                                            <option></option>
+                                            @foreach($experiences as $experience)
+                                                <option value="{{ $experience->id }}">{{ $experience->address }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>

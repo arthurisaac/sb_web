@@ -166,6 +166,22 @@
                         </ul>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#experiences" aria-expanded="false"
+                       aria-controls="experiences">
+                        <i class="menu-icon mdi mdi-account-circle-outline"></i>
+                        <span class="menu-title">{{ __("Expériences") }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="experiences">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" href="{{ route("experiences.index") }}"> {{ __("Gestion") }} </a></li>
+                        </ul>
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" href="{{ route("experiences.create") }}"> {{ __("Ajouter") }} </a></li>
+                        </ul>
+                    </div>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('app-settings.index') }}">

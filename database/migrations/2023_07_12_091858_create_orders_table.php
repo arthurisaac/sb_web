@@ -28,9 +28,10 @@ return new class extends Migration
             $table->string("promo_code")->nullable(true);
             $table->double("total")->default(0)->nullable(true);
             $table->double("payment_method")->nullable(true);
-            $table->boolean("order_confirmation")->default(false)->nullable(true);
+            $table->foreignIdFor(User::class,"order_confirmation")->nullable(true);
             $table->boolean("delivrey_confirmation")->default(false)->nullable(true);
             $table->string("trique")->unique()->nullable(true);
+            $table->string("reservation")->nullable(true);
             $table->timestamps();
         });
     }

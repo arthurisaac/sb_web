@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Box;
 use App\Models\Category;
+use App\Models\Experience;
+use App\Models\ExperienceItem;
 use App\Models\ImagesBox;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -25,7 +27,9 @@ class BoxController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view("boxes.create", compact("categories"));
+        $experiences = Experience::all();
+
+        return view("boxes.create", compact("categories", "experiences"));
     }
 
     /**
@@ -41,6 +45,7 @@ class BoxController extends Controller
             "validity" => "required",
             'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'images' => 'required',
+            'experiences' => 'required'
         ]);
 
         $path = $request->file('image')->store('images', 'public');
@@ -74,6 +79,16 @@ class BoxController extends Controller
                 'image' => $image
             ]);
             $ib->save();
+        }
+
+        if ($request->get('experiences')) {
+            foreach ($request->get('experiences') as $exp) {
+                $expItem = new ExperienceItem([
+                    'box' => $data->id,
+                    'experience' => $exp
+                ]);
+                $expItem->save();
+            }
         }
 
         return redirect()->back()->with("success", "Box enregistré avec succès");

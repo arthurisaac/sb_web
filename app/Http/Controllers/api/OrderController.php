@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ApiResource;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -126,17 +127,45 @@ class OrderController extends Controller
 
     public function madeConfirmation(Request $request) {
         $request->validate([
-            "order_id" => "required"
+            "order_id" => "required",
+            "user" => "required"
         ]);
 
         $order = Order::query()->find($request->get("order_id"));
         if ($order) {
-            $order->order_confirmation = true;
+            $order->order_confirmation = $request->get("user");
         }
         $order->save();
 
         return response()->json([
             'message' => 'Order confirmed successfully.',
         ]);
+    }
+
+    public function reserveOrder(Request $request) {
+        $request->validate([
+            "order_id" => "required",
+            "reservation_date" => "required",
+        ]);
+
+        $order = Order::query()->find($request->get("order_id"));
+        if ($order) {
+            $order->reservation = $request->get("reservation_date");
+        }
+        $order->save();
+
+        return response()->json([
+            'message' => 'Order reservation successfully.',
+        ]);
+    }
+
+    public function getSavedOrders(Request $request) {
+        $request->validate([
+            "order_confirmation" => "required",
+        ]);
+
+        $orders = Order::with("Box")->where("order_confirmation", $request->get("order_confirmation"))->get();
+
+        return new ApiResource($orders);
     }
 }

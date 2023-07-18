@@ -48,3 +48,7 @@ Route::post('sections', [SectionController::class, 'index']);
 Route::post('check-number', [OrderController::class, 'checkNumber']);
 
 Route::post('confirmed-order', [OrderController::class, 'madeConfirmation']);
+
+Route::post('reserve-order', [OrderController::class, 'reserveOrder']);
+
+Route::post('saved-box-order', [OrderController::class, 'getSavedOrders']);

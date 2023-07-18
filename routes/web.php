@@ -3,6 +3,7 @@
 use App\Http\Controllers\AppSettingController;
 use App\Http\Controllers\BoxController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\SectionsController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin',], fun
     Route::resource('boxes', BoxController::class);
     Route::resource('app-settings', AppSettingController::class);
     Route::resource('sections', SectionsController::class);
+    Route::resource('experiences', ExperienceController::class);
 });
 
 

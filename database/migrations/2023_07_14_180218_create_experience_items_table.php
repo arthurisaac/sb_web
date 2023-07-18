@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Box;
+use App\Models\Experience;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('experience_items', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Experience::class, 'experience');
+            $table->foreignIdFor(Box::class, 'box');
             $table->timestamps();
         });
     }
