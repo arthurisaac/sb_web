@@ -11,6 +11,7 @@ class AppSetting extends Model
     protected $fillable = [
         'banner_ad_enable',
         'banner_ad',
+        'banner_ad_detail',
         'header_background',
         'header_title',
         'header_categoory',

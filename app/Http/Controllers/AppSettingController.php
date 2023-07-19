@@ -59,16 +59,17 @@ class AppSettingController extends Controller
 
         if ($request->file('header_background')) {
             $path = $request->file('header_background')->store('images', 'public');
+            $appSetting->header_background = $path;
         }
 
-        $appSetting->banner_ad_enable = $request->get("banner_ad_enable");
-        $appSetting->header_title = $request->get("header_title");
-        $appSetting->banner_ad = $request->get("banner_ad");
-        $appSetting->header_categoory = $request->get("header_categoory");
-        $appSetting->header_hide_button = $request->get("header_hide_button");
-        $appSetting->maintenance_mode = $request->get("maintenance_mode");
-        $appSetting->min_version = $request->get("min_version");
-        $appSetting->header_background = $path;
+        $appSetting->banner_ad_enable = $request->get("banner_ad_enable") ?? $appSetting->banner_ad_enable;
+        $appSetting->header_title = $request->get("header_title") ?? $appSetting->header_title;
+        $appSetting->banner_ad = $request->get("banner_ad") ?? $appSetting->banner_ad;
+        $appSetting->banner_ad_detail = $request->get("banner_ad_detail") ? utf8_encode($request->get("banner_ad_detail")) : $appSetting->banner_ad_detail;
+        $appSetting->header_categoory = $request->get("header_categoory") ?? $appSetting->header_categoory;
+        $appSetting->header_hide_button = $request->get("header_hide_button") ?? $appSetting->header_hide_button;
+        $appSetting->maintenance_mode = $request->get("maintenance_mode") ?? $appSetting->maintenance_mode;
+        $appSetting->min_version = $request->get("min_version") ?? $appSetting->min_version;
 
         $appSetting->save();
 

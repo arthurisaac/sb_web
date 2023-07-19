@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->boolean("header_hide_button")->default(false)->nullable();
             $table->boolean("maintenance_mode")->default(false)->nullable();
             $table->string("min_version")->default("0.1")->nullable();
+            $table->text("banner_ad_detail")->nullable();
             $table->timestamps();
         });
 
