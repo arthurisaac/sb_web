@@ -3,8 +3,12 @@
 use App\Http\Controllers\api\AppSettingsController;
 use App\Http\Controllers\api\BoxController;
 use App\Http\Controllers\api\CategoryController;
+use App\Http\Controllers\api\CodeCheckController;
+use App\Http\Controllers\api\FavoriteController;
+use App\Http\Controllers\api\ForgotPasswordController;
 use App\Http\Controllers\api\OrderController;
 use App\Http\Controllers\api\OrderPaymentController;
+use App\Http\Controllers\api\ResetPasswordController;
 use App\Http\Controllers\api\SectionController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
@@ -39,6 +43,7 @@ Route::post('all-boxes', [BoxController::class, 'index']);
 Route::post('boxes-in-category', [BoxController::class, 'showBoxOfACategory']);
 
 Route::post('save-order', [OrderController::class, 'store']);
+
 Route::post('save-payment', [OrderPaymentController::class, 'store']);
 
 Route::post('settings', [AppSettingsController::class, 'index']);
@@ -52,3 +57,15 @@ Route::post('confirmed-order', [OrderController::class, 'madeConfirmation']);
 Route::post('reserve-order', [OrderController::class, 'reserveOrder']);
 
 Route::post('saved-box-order', [OrderController::class, 'getSavedOrders']);
+
+Route::post('add-favorite', [FavoriteController::class, 'store']);
+
+Route::post('favorites', [FavoriteController::class, 'index']);
+
+Route::post('search-box', [BoxController::class, 'search']);
+
+Route::post('password/email',  ForgotPasswordController::class);
+
+Route::post('password/code/check', CodeCheckController::class);
+
+Route::post('password/reset', ResetPasswordController::class);

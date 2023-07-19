@@ -34,4 +34,8 @@ class Box extends Model
     public function images() {
         return $this->hasMany(ImagesBox::class, 'box');
     }
+
+    public function favorites() {
+        return $this->hasOne(Favorite::class, 'box');
+    }
 }
