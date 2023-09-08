@@ -58,14 +58,14 @@
                                     </div>
                                     <div class="form-group">
                                         <input type="discount" name="discount" class="form-control form-control-lg"
-                                               placeholder="discount"/>
+                                               placeholder="discount" value="0"/>
                                     </div>
                                     <div class="form-group">
                                         <input type="discount_code" name="discount_code"
                                                class="form-control form-control-lg" placeholder="discount_code"/>
                                     </div>
                                     <div class="form-group">
-                                        <textarea class="form-control form-control-lg" name="description" placeholder="Description" rows="10"></textarea>
+                                        <textarea class="form-control form-control-lg tinymce-editor" name="description" placeholder="Description" rows="10"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <input type="file" name="images[]" class="form-control form-control-lg"
@@ -94,22 +94,21 @@
                                                placeholder="validity"/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="country" class="form-control form-control-lg"
+                                        <input type="text" name="country" class="form-control form-control-lg "
                                                placeholder="country"/>
                                     </div>
                                     <div class="form-group">
-                                        <textarea name="must_know" class="form-control form-control-lg"
+                                        <textarea name="must_know" class="form-control form-control-lg tinymce-editor"
                                                   placeholder="must_know"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <textarea name="is_inside" class="form-control form-control-lg"
+                                        <textarea name="is_inside" class="form-control form-control-lg tinymce-editor"
                                                   placeholder="is_inside"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <select name="experiences[]" id="experiences" class="form-control form-control-lg" multiple>
-                                            <option></option>
                                             @foreach($experiences as $experience)
-                                                <option value="{{ $experience->id }}">{{ $experience->address }}</option>
+                                                <option value="{{ $experience->id }}">{{ $experience->city }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -124,4 +123,22 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset("vendors/tinymce/tinymce.js") }}"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: 'textarea.tinymce-editor',
+            height: 300,
+            menubar: false,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount', 'image'
+            ],
+            toolbar: 'undo redo | formatselect | ' +
+                'bold italic backcolor | alignleft aligncenter ' +
+                'alignright alignjustify | bullist numlist outdent indent | ' +
+                'removeformat | help',
+            content_css: '//www.tiny.cloud/css/codepen.min.css'
+        });
+    </script>
 @endsection

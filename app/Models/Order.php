@@ -31,4 +31,10 @@ class Order extends Model
     public function Box() {
         return $this->belongsTo(Box::class, 'box')->with("images");
     }
+    public function User() {
+        return $this->belongsTo(User::class, 'user');
+    }
+    public function Payments() {
+        return $this->hasMany(OrderPayment::class, 'order');
+    }
 }

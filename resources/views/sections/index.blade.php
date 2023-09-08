@@ -38,7 +38,11 @@
                                         </td>
                                         <td><a href="{{ route("sections.edit", $section) }}"
                                                class="btn btn-sm btn-primary"></a>
-                                            <button class="btn btn-sm btn-danger" style="margin-left: 5px;"></button>
+                                            <a onclick="document.getElementById('deleteform').submit()" class="btn btn-sm btn-danger" style="margin-left: 5px;"></a>
+                                            <form id="deleteform" method="post" action="{{ route("sections.destroy", $section->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -55,13 +59,28 @@
                         <br>
                         <form action="{{ route("sections.store") }}" method="post">
                             @csrf
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div><br/>
+                            @endif
+                            @if(session()->get('success'))
+                                <div class="alert alert-success">
+                                    {{ session()->get('success') }}
+                                </div>
+                                <br>
+                            @endif
 
                             <div class="form-group">
                                 <input type="text" name="title" class="form-control form-control-lg"
                                        placeholder="Titre"/>
                             </div>
                             <div class="form-group">
-                                <select class="form-control form-control-lg" name="boxes" multiple>
+                                <select class="form-control form-control-lg" name="boxes[]" multiple>
                                     @foreach($boxes as $box)
                                         <option value="{{ $box->id }}">{{ $box->name }}</option>
                                     @endforeach

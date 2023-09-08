@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ApiResource;
 use App\Models\Box;
+use App\Models\SubCategory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -35,7 +36,12 @@ class BoxController extends Controller
             //->whereRelation("favorites", "user", $user)
             ->where("category", $request->get("category"))
             ->get();
-        return new ApiResource($boxes);
+
+        $subcategories = SubCategory::with('Items')->where("category", $request->get("category"))->get();
+        return response()->json([
+            'boxes' => $boxes,
+            'sub_categories' => $subcategories,
+        ]);
     }
 
     public function search(Request $request) {

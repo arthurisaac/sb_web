@@ -61,9 +61,10 @@ class ExperienceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Experience $experience)
+    public function edit($id)
     {
-        //
+        $experience = Experience::query()->find($id);
+        return view("experiences.edit", compact("experience"));
     }
 
     /**

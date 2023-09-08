@@ -45,7 +45,7 @@
                     <div class="card-body">
                         <h4  class="card-title card-title-dash">Ajouter</h4>
                         <br>
-                        <form action="{{ route("categories.store") }}" method="post">
+                        <form action="{{ route("categories.store") }}" method="post" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group">
@@ -53,6 +53,10 @@
                             </div>
                             <div class="form-group">
                                 <textarea name="description" class="form-control form-control-lg" rows="10" placeholder="Description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="file" name="image" class="form-control form-control-lg"
+                                       placeholder="image"/>
                             </div>
 
                             <button class="btn btn-primary">Valider</button>

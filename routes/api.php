@@ -1,15 +1,19 @@
 <?php
 
 use App\Http\Controllers\api\AppSettingsController;
+use App\Http\Controllers\api\BoxCommentController;
 use App\Http\Controllers\api\BoxController;
 use App\Http\Controllers\api\CategoryController;
 use App\Http\Controllers\api\CodeCheckController;
+use App\Http\Controllers\api\FAQController;
 use App\Http\Controllers\api\FavoriteController;
 use App\Http\Controllers\api\ForgotPasswordController;
 use App\Http\Controllers\api\OrderController;
 use App\Http\Controllers\api\OrderPaymentController;
 use App\Http\Controllers\api\ResetPasswordController;
 use App\Http\Controllers\api\SectionController;
+use App\Http\Controllers\api\SubCategoryController;
+use App\Http\Controllers\api\SupportEmailController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -69,3 +73,11 @@ Route::post('password/email',  ForgotPasswordController::class);
 Route::post('password/code/check', CodeCheckController::class);
 
 Route::post('password/reset', ResetPasswordController::class);
+
+Route::post('faqs', [FAQController::class, 'index']);
+
+Route::post('send-message', [SupportEmailController::class, 'index']);
+
+Route::post('send-comment', [BoxCommentController::class, 'store']);
+
+Route::post('sub-categories', [SubCategoryController::class, 'index']);

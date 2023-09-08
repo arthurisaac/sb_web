@@ -9,6 +9,7 @@ class OrderPayment extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'user',
         'order',
         'payment_method',
         'phone_number',

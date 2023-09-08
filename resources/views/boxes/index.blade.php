@@ -37,7 +37,13 @@
                                     <td> {{ $box->validity }} </td>
                                     <td> {{ $box->notation }} </td>
                                     <td> {{ ($box->enable == 1) ? "Actif" : "Inactif" }} </td>
-                                    <td> <a href="{{ route("boxes.edit", $box) }}" class="btn btn-sm btn-primary"></a><button class="btn btn-sm btn-danger" style="margin-left: 5px;"></button></td>
+                                    <td> <a href="{{ route("boxes.edit", $box) }}" class="btn btn-sm btn-primary"></a>
+                                        <a onclick="if(confirm('Supprimer ?')){document.getElementById('deleteform').submit()}" class="btn btn-sm btn-danger" style="margin-left: 5px;"></a>
+                                        <form id="deleteform" method="post" action="{{ route("boxes.destroy", $box->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

@@ -45,24 +45,18 @@
             <ul class="navbar-nav">
                 <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
                     <h1 class="welcome-text">{{ ("Bonjour") }}, <span class="text-black fw-bold">{{ auth()->user()->nom }} {{ auth()->user()->prenom }}</span></h1>
-                    <h3 class="welcome-sub-text">{{ __("Statitiques du jour") }} </h3>
+                    <h3 class="welcome-sub-text">{{ $subtitle ?? "" }} </h3>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item d-none d-lg-block">
+                {{--<li class="nav-item d-none d-lg-block">
                     <div id="datepicker-popup" class="input-group date datepicker navbar-date-picker">
-              <span class="input-group-addon input-group-prepend border-right">
-                <span class="icon-calendar input-group-text calendar-icon"></span>
-              </span>
+                          <span class="input-group-addon input-group-prepend border-right">
+                            <span class="icon-calendar input-group-text calendar-icon"></span>
+                          </span>
                         <input type="text" class="form-control">
                     </div>
-                </li>
-                <li class="nav-item">
-                    <form class="search-form" action="#">
-                        <i class="icon-search"></i>
-                        <input type="search" class="form-control" placeholder="Search Here" title="Search here">
-                    </form>
-                </li>
+                </li>--}}
                 <li class="nav-item dropdown d-none d-lg-block user-dropdown">
                     <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                         <img class="img-xs rounded-circle" src="https://ui-avatars.com/api/?name={{ auth()->user()->nom }}+{{ auth()->user()->prenom }}" alt="Profile image"> </a>
@@ -120,30 +114,19 @@
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="{{ route("home") }}">
                         <i class="mdi mdi-grid-large menu-icon"></i>
                         <span class="menu-title">{{__("Tableau de bord")}}</span>
                     </a>
                 </li>
-                <li class="nav-item nav-category">UI Elements</li>
+                <li class="nav-item nav-category">Coffrets/Boxes</li>
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                       aria-controls="ui-basic">
-                        <i class="menu-icon mdi mdi-floor-plan"></i>
-                        <span class="menu-title">UI Elements</span>
-                        <i class="menu-arrow"></i>
+                    <a class="nav-link" href="{{ route('orders.index') }}">
+                        <i class="mdi mdi-grid-large menu-icon"></i>
+                        <span class="menu-title">{{__("Commandes")}}</span>
                     </a>
-                    <div class="collapse" id="ui-basic">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link"
-                                                    href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
-                            <li class="nav-item"><a class="nav-link"
-                                                    href="pages/ui-features/typography.html">Typography</a></li>
-                        </ul>
-                    </div>
                 </li>
+                <li class="nav-item nav-category">Général</li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('categories.index') }}">
                         <i class="mdi mdi-grid-large menu-icon"></i>
@@ -151,9 +134,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('sub-categories.index') }}">
+                        <i class="mdi mdi-grid-large menu-icon"></i>
+                        <span class="menu-title">{{__("Sous-catégories")}}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false"
                        aria-controls="auth">
-                        <i class="menu-icon mdi mdi-account-circle-outline"></i>
+                        <i class="mdi mdi-grid-large menu-icon"></i>
                         <span class="menu-title">{{ __("Box") }}</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -169,7 +158,7 @@
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#experiences" aria-expanded="false"
                        aria-controls="experiences">
-                        <i class="menu-icon mdi mdi-account-circle-outline"></i>
+                        <i class="mdi mdi-grid-large menu-icon"></i>
                         <span class="menu-title">{{ __("Expériences") }}</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -195,28 +184,25 @@
                         <span class="menu-title">{{__("Section")}}</span>
                     </a>
                 </li>
-
-                <li class="nav-item nav-category">pages</li>
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false"
-                       aria-controls="auth">
-                        <i class="menu-icon mdi mdi-account-circle-outline"></i>
-                        <span class="menu-title">User Pages</span>
-                        <i class="menu-arrow"></i>
+                    <a class="nav-link" href="{{ route('faqs.index') }}">
+                        <i class="mdi mdi-grid-large menu-icon"></i>
+                        <span class="menu-title">{{__("FAQ")}}</span>
                     </a>
-                    <div class="collapse" id="auth">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-                        </ul>
-                    </div>
                 </li>
-                <li class="nav-item nav-category">help</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('users.index') }}">
+                        <i class="mdi mdi-grid-large menu-icon"></i>
+                        <span class="menu-title">{{__("Gestion des utilisateurs")}}</span>
+                    </a>
+                </li>
+                {{--<li class="nav-item nav-category">help</li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://bootstrapdash.com/demo/star-admin2-free/docs/documentation.html">
                         <i class="menu-icon mdi mdi-file-document"></i>
                         <span class="menu-title">Documentation</span>
                     </a>
-                </li>
+                </li>--}}
             </ul>
         </nav>
         <!-- partial -->
@@ -257,7 +243,7 @@
 <!-- inject:js -->
 <script src="{{ asset("js/off-canvas.js")}}"></script>
 <script src="{{ asset("js/hoverable-collapse.js")}}"></script>
-<script src="{{ asset("js/template.js")}}"></script>
+{{--<script src="{{ asset("js/template.js")}}"></script>--}}
 <script src="{{ asset("js/settings.js")}}"></script>
 <script src="{{ asset("js/todolist.js")}}"></script>
 <!-- endinject -->
@@ -266,6 +252,9 @@
 <script src="{{ asset("js/dashboard.js")}}"></script>
 <script src="{{ asset("js/Chart.roundedBarCharts.js")}}"></script>
 <!-- End custom js for this page-->
+
+@stack('other-scripts')
+
 </body>
 
 </html>

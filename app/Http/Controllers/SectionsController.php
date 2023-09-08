@@ -33,7 +33,7 @@ class SectionsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-           "title" => 'required',
+            "title" => 'required',
             "boxes" => 'required'
         ]);
 
@@ -69,24 +69,57 @@ class SectionsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Sections $sections)
+    public function edit($id)
     {
-        //
+        $section = Sections::query()->with("Boxes")->find($id);
+        $boxes = Box::query()->get();
+
+        return view("sections.edit", compact("section", "boxes"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Sections $sections)
+    public function update(Request $request, Sections $section)
     {
-        //
+        //$section = Sections::query()->with("Boxes")->find($sections->id);
+
+        $request->validate([
+            "title" => 'required',
+            "boxes" => 'required'
+        ]);
+
+        $boxes = $request->get("boxes");
+
+        $items = SectionItem::query()->where("section", $section->id)->get();
+        foreach ($items as $item) {
+            $item->delete();
+        }
+
+        foreach ($boxes as $box) {
+            $item = new SectionItem([
+                'section' => $section->id,
+                'box' => $box
+            ]);
+            $item->save();
+        }
+
+        $section->title = $request->get("title");
+        $section->save();
+
+        return redirect()->back()->with("success", "Enregistré avec succès");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Sections $sections)
+    public function destroy($id)
     {
-        //
+        $data = Sections::query()->find($id);
+        if ($data) {
+            $data->delete();
+        }
+
+        return redirect()->back()->with("success", "Enregistré avec succès");
     }
 }

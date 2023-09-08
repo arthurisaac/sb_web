@@ -15,4 +15,12 @@ class Category extends Model
         'image',
         'order',
     ];
+
+    public function SubCategory() {
+        return $this->belongsTo(SubCategory::class, "category")->with("Items");
+    }
+
+    public function SubCategories() {
+        return $this->hasMany(SubCategory::class, "category")->with("Items");
+    }
 }

@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="row flex-grow">
-            <div class="col-md-10 col-lg-10 grid-margin stretch-card">
+            <div class="col-md-12 col-lg-10 grid-margin stretch-card">
                 <div class="card card-rounded">
                     <div class="card-body">
                         <h4 class="card-title">{{__('Expériences')}}</h4>
@@ -35,18 +35,12 @@
                                     <td> {{ $experience->address }} </td>
                                     <td> {{ $experience->latitude }}, {{ $experience->longitude }},  </td>
                                     <td><img src="{{ url("storage/" . $experience->image) }}" alt="">  </td>
-                                    <td> <a href="{{ route("experiences.edit", $experience) }}" class="btn btn-sm btn-primary"></a><button class="btn btn-sm btn-danger" style="margin-left: 5px;"></button></td>
+                                    <td> <a href="{{ route("experiences.edit", $experience) }}" class="btn btn-sm btn-primary"></a><a href="{{ route("experiences.destroy", $experience->id) }}" class="btn btn-sm btn-danger" style="margin-left: 5px;"></a></td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2 col-lg-2 grid-margin stretch-card">
-                <div class="card card-rounded">
-                    <div class="card-body">
                     </div>
                 </div>
             </div>
