@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendAcceptedReserved;
 use App\Mail\SendBoxCode;
+use App\Mail\SendRejectReserved;
+use App\Mail\SendSuccessBoxChange;
+use App\Mail\SendSuccessReserved;
+use App\Models\Box;
 use App\Models\Order;
 use App\Models\OrderPayment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -63,7 +69,8 @@ class OrderController extends Controller
     {
         $order = Order::query()->find($id);
         $payment = OrderPayment::query()->where("order", $id)->first();
-        return view("orders.edit", compact("order", "payment"));
+        $boxes = Box::query()->get();
+        return view("orders.edit", compact("order", "payment", "boxes"));
     }
 
     /**
@@ -117,5 +124,106 @@ class OrderController extends Controller
         }
 
         return redirect()->back()->with("success", "Paiement confirmé avec succès");
+    }
+
+    public function confirmReservation(Request $request)
+    {
+        $request->validate([
+            "order" => "required",
+        ]);
+        $order = Order::with("Box")
+            ->with("User")
+            ->find($request->get("order"));
+
+        if ($order) {
+            $order->status = 1;
+            $order->save();
+        }
+
+        $user = $order->User;
+        $box = $order->Box;
+
+        if ($order->reservation) {
+            $date_reservation = date("d-m-Y", strtotime($order->reservation));
+            if ($user && $box) {
+                Mail::to($user->email)->send(new SendAcceptedReserved($box, $date_reservation));
+            }
+        }
+
+        return redirect()->back()->with("success", "Paiement confirmé avec succès");
+    }
+
+    public function rejectReservation(Request $request)
+    {
+        $request->validate([
+            "order" => "required",
+        ]);
+        $order = Order::with("Box")
+            ->with("User")
+            ->find($request->get("order"));
+
+        if ($order) {
+            $order->status = 0;
+            $order->reservation = null;
+            $order->save();
+        }
+
+        $user = $order->User;
+        $box = $order->Box;
+
+        if ($order->reservation) {
+            $date_reservation = date("d-m-Y", strtotime($order->reservation));
+            if ($user && $box) {
+                Mail::to($user->email)->send(new SendRejectReserved($box, $date_reservation));
+            }
+        }
+
+        return redirect()->back()->with("success", "La reservation a été ennulée");
+    }
+
+
+    public function consumeReservation(Request $request)
+    {
+        $request->validate([
+            "order" => "required",
+        ]);
+        $order = Order::with("Box")
+            ->with("User")
+            ->find($request->get("order"));
+
+        if ($order) {
+            $order->status = 2;
+            $order->save();
+        }
+
+        return redirect()->back()->with("success", "Reservation marquée comme consommé");
+    }
+
+    public function changeBoxReservation(Request $request)
+    {
+        $request->validate([
+            "order" => "required",
+        ]);
+        $order = Order::with("Box")
+            ->with("User")
+            ->find($request->get("order"));
+
+        if ($order) {
+            $order->box = $request->get("box");
+            $order->save();
+        }
+
+        $order = Order::with("Box")
+            ->with("User")
+            ->find($request->get("order"));
+
+        $user = $order->User;
+        $box = $order->Box;
+
+        if ($user && $box) {
+            Mail::to($user->email)->send(new SendSuccessBoxChange($box));
+        }
+
+        return redirect()->back()->with("success", "Le cadeau a été échangé");
     }
 }

@@ -12,6 +12,7 @@ use App\Http\Controllers\api\OrderController;
 use App\Http\Controllers\api\OrderPaymentController;
 use App\Http\Controllers\api\ResetPasswordController;
 use App\Http\Controllers\api\SectionController;
+use App\Http\Controllers\api\SliderMainPageController;
 use App\Http\Controllers\api\SubCategoryController;
 use App\Http\Controllers\api\SupportEmailController;
 use App\Http\Controllers\AuthController;
@@ -81,3 +82,7 @@ Route::post('send-message', [SupportEmailController::class, 'index']);
 Route::post('send-comment', [BoxCommentController::class, 'store']);
 
 Route::post('sub-categories', [SubCategoryController::class, 'index']);
+
+Route::post('sliders-main-page', [SliderMainPageController::class, 'index']);
+
+Route::post('delete-user', [AuthController::class, 'deleteUser']);

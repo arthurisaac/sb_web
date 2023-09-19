@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Rider;
 use App\Models\User;
+use App\Models\UserDeleted;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -53,6 +54,43 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'User registered successfully.',
             'user' => $user,
+        ], 201);
+    }
+
+    public function deleteUser(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'user' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'The given data was invalid.',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $user = User::query()->find($request->get("user"));
+
+        if ($user) {
+            $userDeleted = new UserDeleted([
+                'id_user' => $user->id,
+                'nom' => $user->nom,
+                'prenom' => $user->prenom,
+                'email' => $user->email,
+                'mobile' => $user->mobile,
+                'country' => $user->country,
+                'countryCode' => $user->countryCode,
+                'active' => $user->active,
+                'password' => $user->password,
+            ]);
+            $userDeleted->save();
+
+            $user->delete();
+        }
+
+        return response()->json([
+            'message' => 'User deleted successfully.',
         ], 201);
     }
 

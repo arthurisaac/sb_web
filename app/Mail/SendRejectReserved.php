@@ -3,32 +3,26 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Attachment;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
-class SendBoxCode extends Mailable
+class SendRejectReserved extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $box;
-    public $order;
-    public $user;
-    public $path;
+    public $reservation;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($box, $order, $user)
+    public function __construct($box, $reservation)
     {
-        $this->user = $user;
         $this->box = $box;
-        $this->order = $order;
-
-        $this->path = "images/qrcode_" . time() . ".png";
-        QrCode::format('png')->generate($order->trique, public_path($this->path) );
+        $this->reservation = $reservation;
     }
 
     /**
@@ -37,7 +31,7 @@ class SendBoxCode extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Vous avez reçu un cadeau',
+            subject: 'Votre réservation a été refusée',
         );
     }
 
@@ -51,15 +45,8 @@ class SendBoxCode extends Mailable
         );
     }*/
 
-    public function attachments(): array
-    {
-        return [
-            Attachment::fromPath($this->path),
-        ];
-    }
-
     public function build()
     {
-        return $this->markdown('emails.send-box-code');
+        return $this->markdown('emails.send-reject-reserved');
     }
 }

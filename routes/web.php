@@ -7,10 +7,13 @@ use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SectionsController;
+use App\Http\Controllers\SliderMainPageController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\SubCategoryItemController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,12 +46,34 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin',], fun
     Route::resource('orders', OrderController::class);
     Route::post('orders-confirmation', [OrderController::class, 'confirm'])->name("orders-confirmation");
     Route::resource('users', UserController::class);
+    Route::resource('sliders-main-page', SliderMainPageController::class);
+    Route::resource('reservations', ReservationController::class);
+
+    Route::post('reservation-confirmation', [OrderController::class, 'confirmReservation'])->name("reservation-confirmation");
+    Route::post('reservation-reject', [OrderController::class, 'rejectReservation'])->name("reservation-reject");
+    Route::post('reservation-consume', [OrderController::class, 'consumeReservation'])->name("reservation-consume");
+    Route::post('reservation-change-box', [OrderController::class, 'changeBoxReservation'])->name("reservation-change-box");
     //Route::get('orders', [OrderController::class, 'index'])->name('orders');
+    Route::get('basic', function() {
+        $data = array('name'=>"Sondo Arthur");
+
+        Mail::send('emails.simple', $data, function($message) {
+            $path = "images/qrcode_" . time() . ".png";
+            QrCode::format('png')->generate('Welcome to Makitweb', public_path($path) );
+
+            $message->to('arthur@convergence.studio', 'Tutorials Point')
+                ->subject('Laravel Basic Testing Mail');
+
+            $message->attach(public_path($path));
+            $message->from('r.thur.light@gmail.com','Virat Gandhi');
+        });
+    });
 });
 
-/*Route::get("qr", function () {
-    return QrCode::size(300)->generate('https://techvblogs.com/');
-});*/
+Route::get("qr", function () {
+    //return \QrCode::size(300)->generate('https://techvblogs.com/');
+
+});
 
 
 

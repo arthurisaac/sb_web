@@ -7,6 +7,7 @@ use App\Http\Resources\ApiResource;
 use App\Mail\SendReservationRequestAdmin;
 use App\Mail\SendSuccessReserved;
 use App\Models\Order;
+use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -164,8 +165,10 @@ class OrderController extends Controller
 
         $box = $order->Box;
         $user = $order->User;
+
+        $reservation =  date("d-m-Y", strtotime($request->get("reservation_date")));
         if ($user && $box) {
-            Mail::to($user->email)->send(new SendSuccessReserved($box, $request->get("reservation_date")));
+            Mail::to($user->email)->send(new SendSuccessReserved($box, $reservation));
         }
         $users = User::query()
             ->whereHas("roles", function ($query) {
@@ -174,8 +177,17 @@ class OrderController extends Controller
             ->get();
 
         foreach ($users as $u) {
-            Mail::to($u->email)->send(new SendReservationRequestAdmin($box, $user, $request->get("reservation_date")));
+            Mail::to($u->email)->send(new SendReservationRequestAdmin($box, $user, $reservation));
         }
+
+        /*$reservation = new Reservation([
+            'box' => $box->id,
+            'user' => $user->id,
+            'order' => $order->id,
+            'status' => 0,
+            'reservation' => $request->get("reservation_date"),
+        ]);
+        $reservation->save();*/
 
         return response()->json([
             'message' => 'Order reservation successfully.',

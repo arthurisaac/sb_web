@@ -126,6 +126,12 @@
                         <span class="menu-title">{{__("Commandes")}}</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('reservations.index') }}">
+                        <i class="mdi mdi-grid-large menu-icon"></i>
+                        <span class="menu-title">{{__("Réservations")}}</span>
+                    </a>
+                </li>
                 <li class="nav-item nav-category">Général</li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('categories.index') }}">
@@ -194,6 +200,12 @@
                     <a class="nav-link" href="{{ route('users.index') }}">
                         <i class="mdi mdi-grid-large menu-icon"></i>
                         <span class="menu-title">{{__("Gestion des utilisateurs")}}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('sliders-main-page.index') }}">
+                        <i class="mdi mdi-grid-large menu-icon"></i>
+                        <span class="menu-title">{{__("Gestion des slides")}}</span>
                     </a>
                 </li>
                 {{--<li class="nav-item nav-category">help</li>

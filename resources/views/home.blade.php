@@ -459,7 +459,7 @@
                                                                      src="images/faces/face1.jpg"
                                                                      alt="profile">
                                                                 <div class="wrapper ms-3">
-                                                                    <p class="ms-1 mb-1 fw-bold">{{ $client->User->nom }} {{ $client->User->prenom }}</p>
+                                                                    <p class="ms-1 mb-1 fw-bold">{{ $client->User->nom ?? "Utilisateur inexistant" }} {{ $client->User->prenom ?? "-" }}</p>
                                                                     <small class="text-muted mb-0">{{ $client->Payments->max("amount") ?? 0 }}</small>
                                                                 </div>
                                                             </div>

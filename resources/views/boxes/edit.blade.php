@@ -91,6 +91,14 @@
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
+                                        <input type="date" name="start_time" value="{{ $box->start_time }}" class="form-control form-control-lg"
+                                               placeholder="start_time">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="date" name="end_time" value="{{ $box->end_time }}" class="form-control form-control-lg"
+                                               placeholder="end_time">
+                                    </div>
+                                    <div class="form-group">
                                         <label for="min_person">Nombre de personnes au minimum</label>
                                         <input type="number" name="min_person" id="min_person" class="form-control form-control-lg"
                                                placeholder="min_person" value="{{ $box->min_person }}">

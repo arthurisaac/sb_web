@@ -23,6 +23,8 @@ class Order extends Model
         'total',
         'payment_method',
         'trique',
+        'reservation',
+        'status',
         'order_confirmation',
         'delivrey_confirmation',
         'trique'
