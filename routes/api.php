@@ -44,7 +44,11 @@ Route::middleware(['auth:api', 'role:admin'])->get('/admin', function () {
 
 //Route::apiResource('categories', CategoryController::class);
 Route::post('categories', [CategoryController::class, 'index']);
+
 Route::post('all-boxes', [BoxController::class, 'index']);
+
+Route::post('boxes-same-prices', [BoxController::class, 'boxesWithSamePrice']);
+
 Route::post('boxes-in-category', [BoxController::class, 'showBoxOfACategory']);
 
 Route::post('save-order', [OrderController::class, 'store']);
@@ -86,3 +90,5 @@ Route::post('sub-categories', [SubCategoryController::class, 'index']);
 Route::post('sliders-main-page', [SliderMainPageController::class, 'index']);
 
 Route::post('delete-user', [AuthController::class, 'deleteUser']);
+
+Route::post('exchange-box', [BoxController::class, 'exchangeBox']);

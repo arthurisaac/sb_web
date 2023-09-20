@@ -39,4 +39,8 @@ class Order extends Model
     public function Payments() {
         return $this->hasMany(OrderPayment::class, 'order');
     }
+
+    protected $casts = [
+        'reservation'  => 'date:d-m-Y',
+    ];
 }

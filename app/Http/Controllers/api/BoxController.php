@@ -4,11 +4,14 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ApiResource;
+use App\Mail\SendSuccessBoxChange;
 use App\Models\Box;
+use App\Models\Order;
 use App\Models\SubCategory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class BoxController extends Controller
@@ -19,6 +22,33 @@ class BoxController extends Controller
     public function index()
     {
         $boxes = Box::query()->get();
+        return new ApiResource($boxes);
+    }
+
+    public function boxesWithSamePrice(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            "price" => "required",
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'The given data was invalid.',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $user = $request->get("user");
+
+        $boxes = Box::query()
+            ->with('images')
+            ->with('favorites', function($q) use ($user) {
+                $q->where('user', $user);
+            })
+            ->where("price", $request->get("price"))
+            ->orWhere("discount", $request->get("price"))
+            ->get();
+
         return new ApiResource($boxes);
     }
 
@@ -69,6 +99,46 @@ class BoxController extends Controller
                 })
             ->get();
         return new ApiResource($boxes);
+    }
+
+    public function exchangeBox(Request $request) {
+        $validator = Validator::make($request->all(), [
+            "order" => "required",
+            "user" => "required",
+            "box" => "required",
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'The given data was invalid.',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $order = Order::with("Box")
+            ->with("User")
+            ->find($request->get("order"));
+
+        if ($order) {
+            $order->box = $request->get("box");
+            $order->save();
+        }
+
+        $order = Order::with("Box")
+            ->with("User")
+            ->find($request->get("order"));
+
+        $user = $order->User;
+        $box = $order->Box;
+
+        if ($user && $box) {
+            Mail::to($user->email)->send(new SendSuccessBoxChange($box));
+        }
+
+
+        return response()->json([
+            'message' => 'Cadeau échangé avec succès',
+        ]);
     }
 
     /**
