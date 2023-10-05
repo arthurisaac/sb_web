@@ -66,9 +66,23 @@ class SubCategoryItemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+
+        SubCategoryItem::query()->where("sub_category", $id)->delete();
+
+        $sub = SubCategoryItem::query()->find($id);
+        $boxes = $request->get('boxes');
+
+        foreach ($boxes as $box) {
+            $item = new SubCategoryItem([
+                'sub_category' => $id,
+                'box' => $box
+            ]);
+            $item->save();
+        }
+
+        return redirect()->back()->with('success', 'Modifié avec succès');
     }
 
     /**

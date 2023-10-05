@@ -28,7 +28,8 @@ class SendBoxCode extends Mailable
         $this->order = $order;
 
         $this->path = "images/qrcode_" . time() . ".png";
-        QrCode::format('png')->generate($order->trique, public_path($this->path) );
+        //QrCode::format('png')->generate($order->trique, public_path($this->path) );
+        QrCode::format('png')->generate($order->trique, $this->path );
     }
 
     /**

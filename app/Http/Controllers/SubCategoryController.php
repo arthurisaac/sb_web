@@ -15,7 +15,7 @@ class SubCategoryController extends Controller
     public function index()
     {
         $categories = Category::query()->get();
-        $subCategories = SubCategory::query()->get();
+        $subCategories = SubCategory::query()->with("Items")->get();
         return view('sub-category.index', compact('subCategories', 'categories'));
     }
 
@@ -69,17 +69,32 @@ class SubCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SubCategory $subCategory)
+    public function edit($id)
     {
-        //
+        $category = SubCategory::query()->with("Items")->find($id);
+        $subCategories = SubCategory::query()->get();
+        $boxes = Box::query()->get();
+        return view("sub-category.edit", compact("category", "subCategories", "boxes"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, SubCategory $subCategory)
+    public function update(Request $request, $id)
     {
-        //
+        $data = SubCategory::query()->find($id);
+
+        if ($data) {
+            $data->title = $request->get('title');
+            $data->description = $request->get('description');
+            if ($request->file('image')) {
+                $data->image = $request->file('image')->store('images', 'public');
+            }
+            $data->save();
+        }
+
+        return redirect()->back()->with("success", "Catégorie modifié avec succès");
+
     }
 
     /**

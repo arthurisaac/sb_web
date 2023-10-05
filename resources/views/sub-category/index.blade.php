@@ -6,7 +6,7 @@
             <div class="col-md-8 col-lg-8 grid-margin stretch-card">
                 <div class="card card-rounded">
                     <div class="card-body">
-                        <h4 class="card-title">Catégories</h4>
+                        <h4 class="card-title">Sous catégories</h4>
 
                         <div class="d-sm-flex justify-content-between align-items-start">
                             <div></div>
@@ -20,6 +20,7 @@
                                 <th>#</th>
                                 <th>Titre</th>
                                 <th>Image</th>
+                                <th>Box</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -29,6 +30,13 @@
                                     <td> {{ $category->id }} </td>
                                     <td> {{ $category->title }} </td>
                                     <td><img src="{{  url("") . '/storage/' .$category->image }}" alt=""></td>
+                                    <td>
+                                        <ul>
+                                            @foreach($category->Items as $item)
+                                                <li>{{ $item->Box->name ?? "Box inexistante" }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </td>
                                     <td>
                                         <a href="{{ route("sub-categories.edit", $category) }}" class="btn btn-sm btn-primary"></a>
                                         <a onclick="document.getElementById('deleteform').submit()" class="btn btn-sm btn-danger" style="margin-left: 5px;"></a>
