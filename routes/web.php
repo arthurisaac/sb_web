@@ -1,10 +1,15 @@
 <?php
 
+use App\Http\Controllers\AccountTransactionController;
 use App\Http\Controllers\AppSettingController;
 use App\Http\Controllers\BoxController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\FAQController;
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\GroupTransferController;
+use App\Http\Controllers\GroupTurnController;
+use App\Http\Controllers\GroupUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReservationController;
@@ -12,7 +17,13 @@ use App\Http\Controllers\SectionsController;
 use App\Http\Controllers\SliderMainPageController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\SubCategoryItemController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserAccountController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserSubAccountController;
+use App\Http\Controllers\UserTransactionController;
+use App\Http\Controllers\UserTransferController;
+use App\Models\UserTransaction;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -46,13 +57,22 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin',], fun
     Route::resource('orders', OrderController::class);
     Route::post('orders-confirmation', [OrderController::class, 'confirm'])->name("orders-confirmation");
     Route::resource('users', UserController::class);
+    Route::resource('users-accounts', UserSubAccountController::class);
     Route::resource('sliders-main-page', SliderMainPageController::class);
     Route::resource('reservations', ReservationController::class);
+    Route::resource('account-transactions', AccountTransactionController::class);
+    Route::resource('user-transfer', UserTransferController::class);
+    Route::resource('groups-transactions', GroupTransferController::class);
+    Route::resource('groups', GroupController::class);
+    Route::post('group-add-members', [GroupController::class, 'addMembers'])->name('group.add-member');
 
-    Route::post('reservation-confirmation', [OrderController::class, 'confirmReservation'])->name("reservation-confirmation");
-    Route::post('reservation-reject', [OrderController::class, 'rejectReservation'])->name("reservation-reject");
-    Route::post('reservation-consume', [OrderController::class, 'consumeReservation'])->name("reservation-consume");
-    Route::post('reservation-change-box', [OrderController::class, 'changeBoxReservation'])->name("reservation-change-box");
+    Route::resource('group-account', GroupUserController::class);
+    Route::resource('group-turn', GroupTurnController::class);
+    Route::resource('group-transactions', GroupTransferController::class);
+    Route::post('group-turns-for-user', [GroupTransferController::class, 'groupTurns'])->name('group-turn.free-turns');
+
+    Route::post('user-account-edit', [UserSubAccountController::class, 'editUserAccount'])->name('user-account-edit');
+
     //Route::get('orders', [OrderController::class, 'index'])->name('orders');
     Route::get('basic', function() {
         $data = array('name'=>"Sondo Arthur");

@@ -10,7 +10,7 @@
 
                         <div class="d-sm-flex justify-content-between align-items-start">
                             <div></div>
-                            <a href="{{ route('categories.create') }}" class="btn btn-primary text-white mb-0 me-0">Ajouter</a>
+                            {{--<a href="{{ route('categories.create') }}" class="btn btn-primary text-white mb-0 me-0">Ajouter</a>--}}
 
                         </div>
                         <div class="table-responsive">
@@ -21,6 +21,7 @@
                                 <th>Nom</th>
                                 <th>Actif</th>
                                 <th>Ordre</th>
+                                <th>Image</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -31,7 +32,14 @@
                                     <td> {{ $category->name }} </td>
                                     <td> {{ ($category->isActive == 0) ? "Actif" : "Inactif" }} </td>
                                     <td> {{ $category->order }} </td>
-                                    <td> <a href="{{ route("categories.edit", $category) }}" class="btn btn-sm btn-primary"></a><button class="btn btn-sm btn-danger" style="margin-left: 5px;"></button></td>
+                                    <td> <img src="{{ url("storage/" . $category->image) }}" alt=""> </td>
+                                    <td> <a href="{{ route("categories.edit", $category) }}" class="btn btn-sm btn-primary">
+                                            <a onclick="if(confirm('Supprimer ?')){document.getElementById('deleteform').submit()}" class="btn btn-sm btn-danger" style="margin-left: 5px;"></a>
+                                            <form id="deleteform" method="post" action="{{ route("categories.destroy", $category->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -56,7 +64,7 @@
                             </div>
                             <div class="form-group">
                                 <input type="file" name="image" class="form-control form-control-lg"
-                                       placeholder="image"/>
+                                       placeholder="image" required/>
                             </div>
 
                             <button class="btn btn-primary">Valider</button>

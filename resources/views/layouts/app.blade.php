@@ -119,17 +119,44 @@
                         <span class="menu-title">{{__("Tableau de bord")}}</span>
                     </a>
                 </li>
-                <li class="nav-item nav-category">Coffrets/Boxes</li>
+                <li class="nav-item nav-category">Comptes utilisateurs</li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('orders.index') }}">
+                    <a class="nav-link" href="{{ route('users-accounts.index') }}">
                         <i class="mdi mdi-grid-large menu-icon"></i>
-                        <span class="menu-title">{{__("Commandes")}}</span>
+                        <span class="menu-title">{{__("Gestion des comptes")}}</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('reservations.index') }}">
+                    <a class="nav-link" href="{{ route('users.index') }}">
                         <i class="mdi mdi-grid-large menu-icon"></i>
-                        <span class="menu-title">{{__("Réservations")}}</span>
+                        <span class="menu-title">{{__("Gestion des utilisateurs")}}</span>
+                    </a>
+                </li>
+                <li class="nav-item nav-category">Groupe</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('groups.index') }}">
+                        <i class="mdi mdi-grid-large menu-icon"></i>
+                        <span class="menu-title">{{__("Gestion des groupes")}}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('group-account.index') }}">
+                        <i class="mdi mdi-grid-large menu-icon"></i>
+                        <span class="menu-title">{{__("Gestion compte groupe")}}</span>
+                    </a>
+                </li>
+
+                <li class="nav-item nav-category">Transactions</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('account-transactions.index') }}">
+                        <i class="mdi mdi-grid-large menu-icon"></i>
+                        <span class="menu-title">{{__("Transactions des comptes")}}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('group-transactions.index') }}">
+                        <i class="mdi mdi-grid-large menu-icon"></i>
+                        <span class="menu-title">{{__("Transactions des groupes")}}</span>
                     </a>
                 </li>
                 <li class="nav-item nav-category">Général</li>
@@ -145,38 +172,6 @@
                         <span class="menu-title">{{__("Sous-catégories")}}</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false"
-                       aria-controls="auth">
-                        <i class="mdi mdi-grid-large menu-icon"></i>
-                        <span class="menu-title">{{ __("Box") }}</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="auth">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="{{ route("boxes.index") }}"> {{ __("Gestion") }} </a></li>
-                        </ul>
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="{{ route("boxes.create") }}"> {{ __("Ajouter") }} </a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#experiences" aria-expanded="false"
-                       aria-controls="experiences">
-                        <i class="mdi mdi-grid-large menu-icon"></i>
-                        <span class="menu-title">{{ __("Expériences") }}</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="experiences">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="{{ route("experiences.index") }}"> {{ __("Gestion") }} </a></li>
-                        </ul>
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="{{ route("experiences.create") }}"> {{ __("Ajouter") }} </a></li>
-                        </ul>
-                    </div>
-                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('app-settings.index') }}">
@@ -185,29 +180,17 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('sections.index') }}">
-                        <i class="mdi mdi-grid-large menu-icon"></i>
-                        <span class="menu-title">{{__("Section")}}</span>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="{{ route('faqs.index') }}">
                         <i class="mdi mdi-grid-large menu-icon"></i>
                         <span class="menu-title">{{__("FAQ")}}</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('users.index') }}">
-                        <i class="mdi mdi-grid-large menu-icon"></i>
-                        <span class="menu-title">{{__("Gestion des utilisateurs")}}</span>
-                    </a>
-                </li>
-                <li class="nav-item">
+                {{--<li class="nav-item">
                     <a class="nav-link" href="{{ route('sliders-main-page.index') }}">
                         <i class="mdi mdi-grid-large menu-icon"></i>
                         <span class="menu-title">{{__("Gestion des slides")}}</span>
                     </a>
-                </li>
+                </li>--}}
                 {{--<li class="nav-item nav-category">help</li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://bootstrapdash.com/demo/star-admin2-free/docs/documentation.html">

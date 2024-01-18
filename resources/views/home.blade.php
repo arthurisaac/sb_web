@@ -2,31 +2,31 @@
 
 @section('content')
     <div class="home-tab">
-        <div class="d-sm-flex align-items-center justify-content-between border-bottom">
+        {{--<div class="d-sm-flex align-items-center justify-content-between border-bottom">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active ps-0" id="home-tab" data-bs-toggle="tab"
                        href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
                 </li>
-                {{--<li class="nav-item">
+                --}}{{--<li class="nav-item">
                     <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#audiences"
                        role="tab" aria-selected="false">Audiences</a>
-                </li>--}}
+                </li>--}}{{--
             </ul>
             <div>
                 <div class="btn-wrapper">
-                    {{--<a href="#" class="btn btn-otline-dark align-items-center"><i
-                            class="icon-share"></i> Share</a>--}}
+                    --}}{{--<a href="#" class="btn btn-otline-dark align-items-center"><i
+                            class="icon-share"></i> Share</a>--}}{{--
                     <a onclick="window.print()" class="btn btn-otline-dark"><i class="icon-printer"></i> Print</a>
-                    {{--<a href="#" class="btn btn-primary text-white me-0"><i
-                            class="icon-download"></i> Exporter</a>--}}
+                    --}}{{--<a href="#" class="btn btn-primary text-white me-0"><i
+                            class="icon-download"></i> Exporter</a>--}}{{--
                 </div>
             </div>
         </div>
         <div class="tab-content tab-content-basic">
             <div class="tab-pane fade show active" id="overview" role="tabpanel"
                  aria-labelledby="overview">
-                {{--<div class="row">
+                --}}{{--<div class="row">
                     <div class="col-sm-12">
                         <div
                             class="statistics-details d-flex align-items-center justify-content-between">
@@ -68,7 +68,7 @@
                             </div>
                         </div>
                     </div>
-                </div>--}}
+                </div>--}}{{--
                 <div class="row">
                     <div class="col-lg-8 d-flex flex-column">
                         <div class="row flex-grow">
@@ -82,7 +82,7 @@
                                                 <p class="card-subtitle card-subtitle-dash">Commandes de l'année
                                                     à hier</p>
                                             </div>
-                                            {{--<div>
+                                            --}}{{--<div>
                                                 <div class="dropdown">
                                                     <button
                                                         class="btn btn-secondary dropdown-toggle toggle-dark btn-lg mb-0 me-0"
@@ -104,14 +104,14 @@
                                                             link</a>
                                                     </div>
                                                 </div>
-                                            </div>--}}
+                                            </div>--}}{{--
                                         </div>
                                         <div
                                             class="d-sm-flex align-items-center mt-1 justify-content-between">
                                             <div
                                                 class="d-sm-flex align-items-center mt-4 justify-content-between">
                                                 <h2 class="me-2 fw-bold">{{ $amountTotal  }}</h2>
-                                                {{--<h4 class="text-success">(+1.37%)</h4>--}}
+                                                --}}{{--<h4 class="text-success">(+1.37%)</h4>--}}{{--
                                             </div>
                                             <div class="me-3">
                                                 <div id="marketing-overview-legend"></div>
@@ -206,7 +206,7 @@
                                 <div class="card card-rounded">
                                     <div class="card-body card-rounded">
                                         <h4 class="card-title  card-title-dash">Evenements réçents</h4>
-                                        {{--<div class="list align-items-center border-bottom py-2">
+                                        --}}{{--<div class="list align-items-center border-bottom py-2">
                                             <div class="wrapper w-100">
                                                 <p class="mb-2 font-weight-medium">
                                                     Change in Directors
@@ -220,16 +220,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>--}}
+                                        </div>--}}{{--
 
-                                        {{--<div class="list align-items-center pt-3">
+                                        --}}{{--<div class="list align-items-center pt-3">
                                             <div class="wrapper w-100">
                                                 <p class="mb-0">
                                                     <a href="#" class="fw-bold text-primary">Show
                                                         all <i class="mdi mdi-arrow-right ms-2"></i></a>
                                                 </p>
                                             </div>
-                                        </div>--}}
+                                        </div>--}}{{--
                                     </div>
                                 </div>
                             </div>
@@ -242,7 +242,7 @@
                                             <p class="mb-0"></p>
                                         </div>
                                         <ul class="bullet-line-list">
-                                            {{--<li>
+                                            --}}{{--<li>
                                                 <div class="d-flex justify-content-between">
                                                     <div><span
                                                             class="text-light-green">Ben Tossell</span>
@@ -250,23 +250,23 @@
                                                     </div>
                                                     <p>Just now</p>
                                                 </div>
-                                            </li>--}}
+                                            </li>--}}{{--
                                         </ul>
-                                        {{-- <div class="list align-items-center pt-3">
+                                        --}}{{-- <div class="list align-items-center pt-3">
                                              <div class="wrapper w-100">
                                                  <p class="mb-0">
                                                      <a href="#" class="fw-bold text-primary">Show
                                                          all <i class="mdi mdi-arrow-right ms-2"></i></a>
                                                  </p>
                                              </div>
-                                         </div>--}}
+                                         </div>--}}{{--
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 d-flex flex-column">
-                        {{--<div class="row flex-grow">
+                        --}}{{--<div class="row flex-grow">
                             <div class="col-12 grid-margin stretch-card">
                                 <div class="card card-rounded">
                                     <div class="card-body">
@@ -377,7 +377,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>--}}
+                        </div>--}}{{--
                         <div class="row flex-grow">
                             <div class="col-12 grid-margin stretch-card">
                                 <div class="card card-rounded">
@@ -409,7 +409,7 @@
                                                     <div>
                                                         <h4 class="card-title card-title-dash">Utilisateurs</h4>
                                                     </div>
-                                                    {{--<div>
+                                                    --}}{{--<div>
                                                         <div class="dropdown">
                                                             <button
                                                                 class="btn btn-secondary dropdown-toggle toggle-dark btn-lg mb-0 me-0"
@@ -427,7 +427,7 @@
                                                                     Wise</a>
                                                             </div>
                                                         </div>
-                                                    </div>--}}
+                                                    </div>--}}{{--
                                                 </div>
                                                 <div class="mt-3">
                                                     <canvas id="leaveReport"></canvas>
@@ -463,9 +463,9 @@
                                                                     <small class="text-muted mb-0">{{ $client->Payments->max("amount") ?? 0 }}</small>
                                                                 </div>
                                                             </div>
-                                                            {{--<div class="text-muted text-small">
+                                                            --}}{{--<div class="text-muted text-small">
                                                                 1h ago
-                                                            </div>--}}
+                                                            </div>--}}{{--
                                                         </div>
                                                     @endforeach
 
@@ -479,7 +479,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>--}}
     </div>
 @endsection
 @push('other-scripts')

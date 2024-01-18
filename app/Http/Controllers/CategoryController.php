@@ -32,11 +32,18 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
+
+        $path = $request->get('old_image');
+        if ($request->file('image')) {
+            $path = $request->file('image')->store('images', 'public');
+        }
 
         $categories = new Category([
             'name' => $request->get('name'),
             'description' => $request->get('description'),
+            'image' => $path
         ]);
         $categories->save();
 
@@ -87,8 +94,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        $category = Category::query()->find($id);
+        $category?->delete();
+        return redirect()->back()->with('success', 'Enregistré avec succès');
     }
 }

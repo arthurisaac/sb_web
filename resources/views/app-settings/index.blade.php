@@ -32,11 +32,6 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="banner_ad_enable">Activer la bannière</label>
-                                        <input type="checkbox" name="banner_ad_enable" id="banner_ad_enable"
-                                               class="form-check-input"  placeholder="Activer la bannière" />
-                                    </div>
                                     <div class="form-group">
                                         <label for="banner_ad">Texte bannière pub</label>
                                         <textarea name="banner_ad" id="banner_ad" class="form-control form-control-lg" rows="10"
@@ -51,23 +46,9 @@
                                         <label for="header_background">Image accueil</label>
                                         <input type="file" name="header_background" class="form-control form-control-lg"/>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="header_title">Titre entête</label>
-                                        <input type="text" name="header_title" id="header_title"
-                                               class="form-control form-control-lg" placeholder="Titre"/>
-                                    </div>
 
                                 </div>
                                 <div class="col">
-                                    <div class="form-group">
-                                        <label for="header_categoory">Catégorie</label>
-                                        <input type="text" name="header_categoory" id="header_categoory"
-                                               class="form-control form-control-lg" placeholder="Titre"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="header_hide_button">Désactiver le bouton</label>
-                                        <input type="checkbox" name="header_hide_button" id="header_hide_button"/>
-                                    </div>
                                     <div class="form-group">
                                         <label for="maintenance_mode">Activer la maintenance</label>
                                         <input type="checkbox" name="maintenance_mode" id="maintenance_mode"/>

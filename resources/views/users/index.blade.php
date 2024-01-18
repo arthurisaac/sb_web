@@ -10,7 +10,7 @@
 
                         <div class="d-sm-flex justify-content-between align-items-start">
                             <div></div>
-                            {{--<a href="{{ route('users.create') }}" class="btn btn-primary text-white mb-0 me-0">Ajouter</a>--}}
+                            <a href="{{ route('users.create') }}" class="btn btn-primary text-white mb-0 me-0">Ajouter</a>
 
                         </div>
                         <div class="table-responsive">
@@ -62,6 +62,21 @@
                     <div class="card-body">
                         <h4 class="card-title card-title-dash">Affecter un role</h4>
                         <br>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div><br/>
+                        @endif
+                        @if(session()->get('success'))
+                            <div class="alert alert-success">
+                                {{ session()->get('success') }}
+                            </div>
+                            <br>
+                        @endif
                         <form action="{{ route("categories.store") }}" method="post" enctype="multipart/form-data">
                             @csrf
 
@@ -77,7 +92,9 @@
                                 <label for="user">Role</label>
                                 <select name="user" id="user" class="form-control form-control-lg">
                                     <option value="1">Admin</option>
-                                    <option value="2">Régulier</option>
+                                    <option value="2">Client</option>
+                                    <option value="3">Partenaire</option>
+                                    <option value="4">Régulier</option>
                                 </select>
                             </div>
 

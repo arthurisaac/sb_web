@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -23,7 +24,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::query()->get();
+        return view("users.create", compact("users"));
     }
 
     /**
@@ -31,7 +33,35 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom' => 'required',
+            'prenom' => 'required',
+            'email' => 'required|string|email|max:255|unique:users',
+            'mobile' => 'required',
+            'country' => 'required',
+            'type' => 'required',
+            'password' => 'required|string|min:8|confirmed',
+            'avatar' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        ]);
+
+        $path = '';
+        if ($request->file('image')) {
+            $path = $request->file('image')->store('images', 'public');
+        }
+
+        $user = User::create([
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'email' => $request->email,
+            'mobile' => $request->mobile,
+            'country' => $request->country,
+            'type' => $request->type,
+            'avatar' => $path,
+            'password' => Hash::make($request->password),
+        ]);
+        $user->save();
+
+        return redirect()->back()->with('success', 'Enregistré avec succès');
     }
 
     /**

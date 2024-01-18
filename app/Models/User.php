@@ -25,7 +25,10 @@ class User extends Authenticatable
         'country',
         'countryCode',
         'active',
+        'type',
+        'avatar',
         'password',
+        'account',
     ];
 
     /**
@@ -49,5 +52,15 @@ class User extends Authenticatable
 
     public function roles() {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function SubAccounts()
+    {
+        return $this->hasMany(UserSubAccount::class, 'user')->with('Category');
+    }
+
+    public function Groups()
+    {
+        return $this->hasMany(GroupUser::class, 'user')->with('Group');
     }
 }
