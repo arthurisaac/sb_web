@@ -95,5 +95,9 @@ Route::get("qr", function () {
 
 });
 
+Route::get("/engagement-confidentialite", function () {
+    return view("pages.confidentiality-agreement");
+});
+
 
 
