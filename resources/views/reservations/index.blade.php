@@ -70,7 +70,7 @@
                                         <td>
                                             @if ($reservation->status == 0 )
                                                 <a onclick="document.getElementById('acceptform').submit()"
-                                                   class="btn btn-sm btn-primary" style="margin-left: 5px;"></a>
+                                                   class="btn btn-sm btn-primary" style="margin-left: 5px;">Accepter</a>
                                                 <form id="acceptform" method="post"
                                                       action="{{ route("reservation-confirmation") }}">
                                                     @csrf
@@ -83,7 +83,7 @@
                                         <td>
                                             @if ($reservation->status == 0 )
                                                 <a onclick="document.getElementById('deleteform').submit()"
-                                                   class="btn btn-sm btn-danger" style="margin-left: 5px;"></a>
+                                                   class="btn btn-sm btn-danger" style="margin-left: 5px;">Rejeter</a>
                                                 <form id="deleteform" method="post"
                                                       action="{{ route("reservation-reject") }}">
                                                     @csrf

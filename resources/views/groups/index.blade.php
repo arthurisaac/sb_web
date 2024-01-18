@@ -52,8 +52,8 @@
                                             <td>{{ $group->subscription }}</td>
                                             <td> {{ count($group->GroupUsers) }}</td>
                                             <td>
-                                                <a href="{{ route("groups.edit", $group) }}" class="btn btn-sm btn-primary"></a>
-                                                <a onclick="if (confirm('Supprimer le groupe? Toutes les transactions concernant ce groupe seront perdus. Action irréversible')) document.getElementById('deleteform-{{ $group->id }}').submit()" class="btn btn-sm btn-danger" style="margin-left: 5px;"></a>
+                                                <a href="{{ route("groups.edit", $group) }}" class="btn btn-sm btn-primary">Modifier</a>
+                                                <a onclick="if (confirm('Supprimer le groupe? Toutes les transactions concernant ce groupe seront perdus. Action irréversible')) document.getElementById('deleteform-{{ $group->id }}').submit()" class="btn btn-sm btn-danger" style="margin-left: 5px;">Supprimer</a>
                                                 <form id="deleteform-{{ $group->id }}" method="post" action="{{ route("groups.destroy", $group->id) }}">
                                                     @csrf
                                                     @method('DELETE')

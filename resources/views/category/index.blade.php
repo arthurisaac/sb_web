@@ -33,8 +33,8 @@
                                     <td> {{ ($category->isActive == 0) ? "Actif" : "Inactif" }} </td>
                                     <td> {{ $category->order }} </td>
                                     <td> <img src="{{ url("storage/" . $category->image) }}" alt=""> </td>
-                                    <td> <a href="{{ route("categories.edit", $category) }}" class="btn btn-sm btn-primary">
-                                            <a onclick="if(confirm('Supprimer ?')){document.getElementById('deleteform').submit()}" class="btn btn-sm btn-danger" style="margin-left: 5px;"></a>
+                                    <td> <a href="{{ route("categories.edit", $category) }}" class="btn btn-sm btn-primary">Modifier</a>
+                                            <a onclick="if(confirm('Supprimer ?')){document.getElementById('deleteform').submit()}" class="btn btn-sm btn-danger" style="margin-left: 5px;">Supprimer</a>
                                             <form id="deleteform" method="post" action="{{ route("categories.destroy", $category->id) }}">
                                                 @csrf
                                                 @method('DELETE')

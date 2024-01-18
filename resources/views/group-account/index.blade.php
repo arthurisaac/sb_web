@@ -30,7 +30,7 @@
                                         <td>{{ $group->subscription }}</td>
                                         <td> {{ count($group->GroupUsers) }}</td>
                                         <td>
-                                            <a href="{{ route("group-account.show", $group->id) }}" class="btn btn-sm btn-dark"></a>
+                                            <a href="{{ route("group-account.show", $group->id) }}" class="btn btn-sm btn-dark">Supprimer</a>
                                         </td>
                                     </tr>
                                 @endforeach
