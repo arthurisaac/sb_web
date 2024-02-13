@@ -37,8 +37,8 @@
                                             </ul>
                                         </td>
                                         <td><a href="{{ route("sections.edit", $section) }}"
-                                               class="btn btn-sm btn-primary"></a>
-                                            <a onclick="document.getElementById('deleteform').submit()" class="btn btn-sm btn-danger" style="margin-left: 5px;"></a>
+                                               class="btn btn-sm btn-primary">Modifier</a>
+                                            <a onclick="document.getElementById('deleteform').submit()" class="btn btn-sm btn-danger" style="margin-left: 5px;">Supprimer</a>
                                             <form id="deleteform" method="post" action="{{ route("sections.destroy", $section->id) }}">
                                                 @csrf
                                                 @method('DELETE')

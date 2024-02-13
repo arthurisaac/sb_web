@@ -31,9 +31,9 @@
                                         <td> <img src="{{ url("storage/" . $slider->image) }}" alt=""> </td>
                                         <td> {{ $slider->type }} </td>
                                         <td><a href="{{ route("sliders-main-page.edit", $slider) }}"
-                                               class="btn btn-sm btn-primary"></a>
+                                               class="btn btn-sm btn-primary">Ajouter</a>
                                             <a onclick="document.getElementById('deleteform').submit()"
-                                               class="btn btn-sm btn-danger" style="margin-left: 5px;"></a>
+                                               class="btn btn-sm btn-danger" style="margin-left: 5px;">Modifier</a>
                                             <form id="deleteform" method="post"
                                                   action="{{ route("sliders-main-page.destroy", $slider->id) }}">
                                                 @csrf

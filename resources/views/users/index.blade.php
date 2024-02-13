@@ -42,7 +42,7 @@
                                             </ul>
                                         </td>
                                         <td>
-                                            <a href="{{ route("users.show", $user) }}" class="btn btn-sm btn-dark"></a>
+                                            <a href="{{ route("users.show", $user) }}" class="btn btn-sm btn-dark">Modifier</a>
                                             {{--<a onclick="document.getElementById('deleteform').submit()" class="btn btn-sm btn-danger" style="margin-left: 5px;"></a>
                                             <form id="deleteform" method="post" action="{{ route("users.destroy", $users->id) }}">
                                                 @csrf

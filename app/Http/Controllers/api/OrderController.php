@@ -160,6 +160,7 @@ class OrderController extends Controller
         $order = Order::query()->find($request->get("order_id"));
         if ($order) {
             $order->reservation = $request->get("reservation_date");
+            $order->status = 0;
         }
         $order->save();
 

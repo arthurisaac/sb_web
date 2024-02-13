@@ -140,13 +140,12 @@ class OrderController extends Controller
             $order->save();
         }
 
-        $user = $order->User;
         $box = $order->Box;
 
         if ($order->reservation) {
             $date_reservation = date("d-m-Y", strtotime($order->reservation));
-            if ($user && $box) {
-                Mail::to($user->email)->send(new SendAcceptedReserved($box, $date_reservation));
+            if ($order->mail_client && $box) {
+                Mail::to($order->mail_client)->send(new SendAcceptedReserved($box, $date_reservation));
             }
         }
 

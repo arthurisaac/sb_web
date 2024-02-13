@@ -38,8 +38,8 @@
                                         </ul>
                                     </td>
                                     <td>
-                                        <a href="{{ route("sub-categories.edit", $category) }}" class="btn btn-sm btn-primary"></a>
-                                        <a onclick="document.getElementById('deleteform').submit()" class="btn btn-sm btn-danger" style="margin-left: 5px;"></a>
+                                        <a href="{{ route("sub-categories.edit", $category) }}" class="btn btn-sm btn-primary">Ajouter</a>
+                                        <a onclick="document.getElementById('deleteform').submit()" class="btn btn-sm btn-danger" style="margin-left: 5px;">Supprimer</a>
                                         <form id="deleteform" method="post" action="{{ route("sub-categories.destroy", $category->id) }}">
                                             @csrf
                                             @method('DELETE')
