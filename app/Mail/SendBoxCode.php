@@ -27,9 +27,13 @@ class SendBoxCode extends Mailable
         $this->box = $box;
         $this->order = $order;
 
-        $this->path = "images/qrcode_" . time() . ".png";
+        $this->path = "storage/qrcode/qrcode.pdf";
+        $pdf = new \Spatie\LaravelPdf\Facades\Pdf();
+        $pdf::view('pdf.qrcode', ['trique' => $order->trique])
+            ->disk('public')
+            ->save('qrcode/qrcode.pdf');
         //QrCode::format('png')->generate($order->trique, public_path($this->path) );
-        QrCode::format('png')->generate($order->trique, $this->path );
+        //QrCode::format('png')->generate($order->trique, $this->path );
     }
 
     /**

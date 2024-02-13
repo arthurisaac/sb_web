@@ -27,8 +27,8 @@
                                 <tr>
                                     <td> {{ $faq->id }} </td>
                                     <td> {{ $faq->question }} </td>
-                                    <td> <a href="{{ route("faqs.edit", $faq) }}" class="btn btn-sm btn-primary"></a>
-                                        <a onclick="document.getElementById('deleteform').submit()" class="btn btn-sm btn-danger" style="margin-left: 5px;"></a>
+                                    <td> <a href="{{ route("faqs.edit", $faq) }}" class="btn btn-sm btn-primary">Modifier</a>
+                                        <a onclick="document.getElementById('deleteform').submit()" class="btn btn-sm btn-danger" style="margin-left: 5px;">Supprimer</a>
                                         <form id="deleteform" method="post" action="{{ route("faqs.destroy", $faq->id) }}">
                                             @csrf
                                             @method('DELETE')

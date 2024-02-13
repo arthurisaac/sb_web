@@ -58,7 +58,7 @@ class OrderPaymentController extends Controller
         $phone_number = $request->get("phone_number");
         $user = $request->get("user");
 
-        $xml = "<?xml version='1.0' encoding='UTF-8'?>
+        /*$xml = "<?xml version='1.0' encoding='UTF-8'?>
                 <COMMAND>
                 <TYPE>OMPREQ</TYPE>
                 <customer_msisdn>$phone_number</customer_msisdn>
@@ -85,9 +85,9 @@ class OrderPaymentController extends Controller
         ));
         $response = file_get_contents($url, false, $send_context);
 
-        $xml = simplexml_load_string("<response>" . $response . "</response>") or die("Error: Cannot create object");
+        $xml = simplexml_load_string("<response>" . $response . "</response>") or die("Error: Cannot create object");*/
 
-        if ($xml->status == 200) {
+        //if ($xml->status == 200) {
             $payment = new OrderPayment([
                 'order' => $request->get('order'),
                 'user' => $request->get('user'),
@@ -111,12 +111,12 @@ class OrderPaymentController extends Controller
             return response()->json([
                 'message' => 'Payment saved successfully.',
             ], 201);
-        } else {
+        /*} else {
             return response()->json([
                 'message' => 'Une erreur dans le paiement.',
                 'data' => $xml
             ]);
-        }
+        }*/
 
     }
 

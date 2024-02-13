@@ -72,11 +72,33 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin',], fun
 
 Route::get("qr", function () {
     //return \QrCode::size(300)->generate('https://techvblogs.com/');
+    //dd("PDF");
+    $data = "Je suis un code";
+    //return view('pdf.qrcode', compact('data'));
+    $pdf = new Spatie\LaravelPdf\Facades\Pdf();
+    $pdf::view('pdf.qrcode', ['invoice' => $data])
+        ->disk('public')
+        ->save('qrcode/qrcode.pdf');
 
+    $mail = array('name'=>"Sondo Arthur");
+
+    Mail::send('emails.simple', $mail, function($message) {
+        $path = "storage/qrcode/qrcode.pdf";
+        //QrCode::format('png')->generate('Welcome to Makitweb', public_path($path) );
+
+        $message->to('r.thur.light@gmail.com', 'Tutorials Point')
+            ->subject('Laravel Basic Testing Mail');
+
+        $message->attach(public_path($path));
+        $message->from('r.thur.light@gmail.com','Virat Gandhi');
+    });
 });
 
 Route::get("/engagement-confidentialite", function () {
     return view("pages.confidentiality-agreement");
+});
+Route::get("/assistance", function () {
+    return view("pages.assistance");
 });
 
 

@@ -35,7 +35,7 @@
                                     <td> {{ $experience->address }} </td>
                                     <td> {{ $experience->latitude }}, {{ $experience->longitude }},  </td>
                                     <td><img src="{{ url("storage/" . $experience->image) }}" alt="">  </td>
-                                    <td> <a href="{{ route("experiences.edit", $experience) }}" class="btn btn-sm btn-primary"></a><a href="{{ route("experiences.destroy", $experience->id) }}" class="btn btn-sm btn-danger" style="margin-left: 5px;"></a></td>
+                                    <td> <a href="{{ route("experiences.edit", $experience) }}" class="btn btn-sm btn-primary">Modifier</a><a href="{{ route("experiences.destroy", $experience->id) }}" class="btn btn-sm btn-danger" style="margin-left: 5px;">Supprimer</a></td>
                                 </tr>
                             @endforeach
                             </tbody>
