@@ -37,8 +37,8 @@
                                     <td>{{ $order->total }}</td>
                                     <td>{{ $order->delivery }}</td>
                                     <td>{{ $order->delivery_place }}</td>
-                                    <td>{{ $order->created_at }}</td>
                                     <td>{{ $order->trique }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($order->created_at)->format("d-M-Y H:i") }}</td>
                                     <td> <a href="{{ route("orders.edit", $order->id) }}" class="btn btn-sm btn-primary">Voir</a>
                                         <a onclick="if(confirm('Supprimer ?')){document.getElementById('deleteform').submit()}" class="btn btn-sm btn-danger" style="margin-left: 5px;">Supprimer</a>
                                         <form id="deleteform" method="post" action="{{ route("orders.destroy", $order->id) }}">
@@ -96,7 +96,7 @@
                                         <td>{{ $order->total }}</td>
                                         <td>{{ $order->delivery }}</td>
                                         <td>{{ $order->delivery_place }}</td>
-                                        <td>{{ $order->created_at }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($order->created_at)->format("d-m-Y H:i") }}</td>
                                         <td>{{ $order->trique }}</td>
                                         <td> <a href="{{ route("orders.edit", $order->id) }}" class="btn btn-sm btn-primary">Voir</a>
                                             <a onclick="if(confirm('Supprimer ?')){document.getElementById('deleteform').submit()}" class="btn btn-sm btn-danger" style="margin-left: 5px;">Supprimer</a>

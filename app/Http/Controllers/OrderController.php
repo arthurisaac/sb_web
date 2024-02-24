@@ -68,7 +68,7 @@ class OrderController extends Controller
     public function edit($id)
     {
         $order = Order::query()->find($id);
-        $payment = OrderPayment::query()->where("order", $id)->first();
+        $payment = OrderPayment::query()->where("order", $id)->orderByDesc('id')->first();
         $boxes = Box::query()->get();
         return view("orders.edit", compact("order", "payment", "boxes"));
     }

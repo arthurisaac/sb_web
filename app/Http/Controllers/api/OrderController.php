@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ApiResource;
+use App\Mail\SendReservationEdited;
 use App\Mail\SendReservationRequestAdmin;
 use App\Mail\SendSuccessReserved;
 use App\Models\Order;
@@ -155,6 +156,7 @@ class OrderController extends Controller
         $request->validate([
             "order_id" => "required",
             "reservation_date" => "required",
+            "is_edit" => "required",
         ]);
 
         $order = Order::query()->find($request->get("order_id"));
@@ -169,7 +171,11 @@ class OrderController extends Controller
 
         $reservation =  date("d-m-Y", strtotime($request->get("reservation_date")));
         if ($user && $box) {
-            Mail::to($user->email)->send(new SendSuccessReserved($box, $reservation));
+            if ($request->get("is_edit") == "false") {
+                Mail::to($user->email)->send(new SendSuccessReserved($box, $reservation));
+            } else {
+                Mail::to($user->email)->send(new SendReservationEdited($box, $reservation));
+            }
         }
         $users = User::query()
             ->whereHas("roles", function ($query) {
